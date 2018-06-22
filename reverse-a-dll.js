@@ -1,25 +1,19 @@
 const DoublyLinkedList = require('./doubly-linked-list')
 
 function reverse(list) {
-  let prevNode = null
   let currentNode = list.head
-  while (currentNode !== null) {
-    let tmpNext = currentNode.next
-    currentNode.next = prevNode
-    prevNode = currentNode
-    currentNode = tmpNext
-  }
-  list.head = prevNode
-
-  currentNode = list.tail.prev
-  prevNode = list.tail
+  
   while (currentNode) {
-    let tmpPrev = currentNode.prev
-    currentNode.prev = prevNode
-    prevNode = currentNode
-    currentNode = tmpPrev
+    let tmpNode = currentNode.next
+    currentNode.next = currentNode.prev
+    currentNode.prev = tmpNode
+
+    currentNode = tmpNode
   }
-  list.tail = prevNode
+
+  let tmpHead = list.head
+  list.head = list.tail
+  list.tail = tmpHead
 }
 
 function main() {
@@ -30,9 +24,7 @@ function main() {
   DLL.insertFirst("It's me")
   DLL.insertFirst("I've been wondering how you been?")
   reverse(DLL)
-  //log(DLL)
-  console.log(DLL.head)
-  console.log(DLL.tail)
+  log(DLL)
 }
 
 if (require.main === module) {

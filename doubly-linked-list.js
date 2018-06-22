@@ -13,10 +13,10 @@ class DoublyLinkedList {
   }
 
   insertFirst(item) {
-    let newHead = new _Node(item, this.head, null)
-    if (!this.tail && this.head) this.tail = this.head
+    const newHead = new _Node(item, this.head, null)
     if (this.head) this.head.prev = newHead
     this.head = newHead
+    if (!this.tail) this.tail = newHead
   }
 
   insertLast(item) {
